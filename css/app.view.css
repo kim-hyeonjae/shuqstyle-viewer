@@ -223,7 +223,7 @@
 
 /*Mobile (Default) */
 .grid-item {
-    width: 100%;
+    width: 45%;
     margin-top: 5px;
     float: left;
     position: relative;
@@ -356,7 +356,7 @@ and (orientation: landscape) {
 /*Tablet & Desktop*/
 @media all and (min-width:768px) {
     .grid-item {
-        width: 120px;
+        width: 230px;
     }
 }
 
@@ -364,7 +364,7 @@ and (orientation: landscape) {
     width: 100%;
     display: block;
     background-size: cover;
-    height: 200px;
+    height: 230px;
 }
 
 .grid-item > .name {
