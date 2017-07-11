@@ -135,7 +135,7 @@ $(document).ready(function() {
         }
 
         if (top_category_id != null && top_region_id != null) {
-            select_sex(details.sex.label, region_id, category_id);
+//            select_sex(details.sex.label, region_id, category_id);
 
             gendered_category = category_id;
             gendered_category |= details.sex.label == 'male' ? M_BIT : F_BIT;
@@ -483,13 +483,13 @@ function search(region_id, category_id, init, use_scroll) {
         gutter: 5
     });
 
-    function addItemElem(name, price, link, image_url, background_pos) {
+    function addItemElem(item, background_pos) {
         var elem = document.createElement("div");
         elem.className = "grid-item";
-        elem.innerHTML = '<img class="thumbnail" src="images/spacer.gif" style="background-image: url(\'' + image_url + '\'); background-position: ' + background_pos + '">' +
-            '<a href="/view.html?type=url&url=' + encodeURIComponent(image_url) + '"><div class="view-button"><img src="images/icon_search.svg"></div></a>' +
-            '<div class="name"><a href="' + link + '">' + name + '</a></div>' +
-            '<div class="price"><a href="' + link + '">' + commify(price) + ' KRW</a></div>';
+        elem.innerHTML = '<img class="thumbnail" src="images/spacer.gif" style="background-image: url(\'' + item.image_url + '\'); background-position: ' + background_pos + '">' +
+            '<a href="/view.html?type=url&url=' + encodeURIComponent(item.image_url) + '"><div class="view-button"><img src="images/icon_search.svg"></div></a>' +
+            '<div class="name"><a href="' + item.product_url + '">' + item.name + '</a></div>' +
+            '<div class="price"><a href="' + item.product_url + '">' + commify(item.price) + ' ' + item.currency +'</a></div>';
         var $elem = $(elem);
         $grid.append($elem).masonry("appended", $elem);
     }
@@ -513,7 +513,7 @@ function search(region_id, category_id, init, use_scroll) {
                 var r = list[j].region;
                 var backgroundPos = Math.floor((r[0] + (r[2] - r[0]) / 2) /
                     list[j].size_info[0] * 100) + '% ';
-                addItemElem(list[j].name, list[j].price, list[j].product_url, list[j].image_url, backgroundPos);
+                addItemElem(list[j], backgroundPos);
             }
         }
 
@@ -529,7 +529,7 @@ function search(region_id, category_id, init, use_scroll) {
     for (var i=0; i<current_category_ids.length; i++) {
         category_id |= current_category_ids[i];
     }
-
+    
     api_search(search_cb, region_id, category_id, 34);
 }
 
